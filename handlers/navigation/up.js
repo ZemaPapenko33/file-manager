@@ -1,6 +1,5 @@
 import path from "path";
-import { userHomedir } from "../utils/consts.js";
-import { printCurrentDir } from "../utils/print.js";
+import { printCurrentDir } from "../../utils/print.js";
 
 export const up = () => {
   const currentPath = process.cwd();

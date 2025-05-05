@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs";
-import { printCurrentDir } from "../utils/print.js";
+import { printCurrentDir } from "../../utils/print.js";
 import { ls } from "./ls.js";
 
 export const cd = async (userInputPath) => {
