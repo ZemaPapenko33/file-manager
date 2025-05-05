@@ -1,6 +1,11 @@
 import { printCurrentDir, printWelcomeMessage } from "./utils/print.js";
 import { handleExit } from "./utils/handleExit.js";
-import { userHomedir, userName, readLine, commands } from "./utils/consts.js";
+import {
+  userHomedir,
+  userName,
+  readLine,
+  handleUserInput,
+} from "./utils/consts.js";
 
 const app = async () => {
   try {
@@ -8,13 +13,8 @@ const app = async () => {
     printWelcomeMessage(userName);
     printCurrentDir();
 
-    readLine.on("line", (input) => {
-      const [cmd, ...args] = input.trim().split(" ");
-      const handler = commands[cmd];
-
-      if (handler) {
-        handler(...args);
-      }
+    readLine.on("line", async (input) => {
+      await handleUserInput(input);
     });
 
     readLine.on("SIGINT", () => handleExit(userName, readLine));

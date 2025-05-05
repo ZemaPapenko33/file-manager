@@ -1,4 +1,5 @@
 import fs from "fs";
+import { printCurrentDir } from "../../utils/print.js";
 
 export const ls = async () => {
   const currentPath = process.cwd();
@@ -29,6 +30,7 @@ export const ls = async () => {
       Type: "file",
     }));
     console.table([...dirTable, ...fileTable]);
+    printCurrentDir();
   } catch (error) {
     console.error(error.message);
   }
