@@ -6,6 +6,7 @@ import { cat, add, mkdir, rn, cp, rm, mv } from "../handlers/fs/index.js";
 import { osInfo } from "../handlers/os/osinfo.js";
 import { hash } from "../handlers/hash/hash.js";
 import { handleExit } from "./handleExit.js";
+import { compress, decompress } from "../handlers/zlib/index.js";
 
 export const userHomedir = homedir();
 const usernameArg = process.argv.find((arg) => arg.startsWith("--username="));
@@ -87,6 +88,20 @@ export const commands = {
       return;
     }
     await hash(pathToFile);
+  },
+  compress: async (pathToFile, pathToDes) => {
+    if (!pathToFile || !pathToDes) {
+      console.log("Invalid input: Missing file path");
+      return;
+    }
+    await compress(pathToFile, pathToDes);
+  },
+  decompress: async (pathToFile, pathToDes) => {
+    if (!pathToFile || !pathToDes) {
+      console.log("Invalid input: Missing file path");
+      return;
+    }
+    await decompress(pathToFile, pathToDes);
   },
   ".exit": () => handleExit(userName, readLine),
 };
