@@ -4,6 +4,7 @@ import { stdin as input, stdout as output } from "process";
 import { up, cd, ls } from "../handlers/navigation/index.js";
 import { cat, add, mkdir, rn, cp, rm, mv } from "../handlers/fs/index.js";
 import { osInfo } from "../handlers/os/osinfo.js";
+import { hash } from "../handlers/hash/hash.js";
 import { handleExit } from "./handleExit.js";
 
 export const userHomedir = homedir();
@@ -79,6 +80,13 @@ export const commands = {
       return;
     }
     osInfo(flag);
+  },
+  hash: async (pathToFile) => {
+    if (!pathToFile) {
+      console.log("Invalid input: Missing file path");
+      return;
+    }
+    await hash(pathToFile);
   },
   ".exit": () => handleExit(userName, readLine),
 };
